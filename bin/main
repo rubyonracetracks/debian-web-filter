@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# NOTE: set -o pipefail is needed to ensure that any error or failure causes the whole pipeline to fail.
+# Without this specification, the CI status will provide a false sense of security by showing builds
+# as succeeding in spite of errors or failures.
+set -eo pipefail
+
+DATE=`date +%Y_%m%d_%H%M_%S`
+DIR_WEB_FILTER=$PWD
+DIR_TMP="$DIR_WEB_FILTER/tmp"
+DIR_HOSTS="$DIR_TMP/hosts"
+FILE_HOSTS='/etc/hosts'
+FILE_HOSTS_OLD="/etc/hosts-$DATE"
+
+echo '-------------------------------'
+echo "Backing up the $FILE_HOSTS file"
+
+echo "sudo cp /etc/hosts /etc/hosts-$DATE"
+sudo cp "$FILE_HOSTS" "$FILE_HOSTS_OLD"
+
+echo '---------------'
+echo "rm -rf $DIR_TMP"
+rm -rf $DIR_TMP
+
+echo '--------------'
+echo "mkdir $DIR_TMP"
+mkdir $DIR_TMP
+
+echo '--------------------------------------------------'
+echo 'git clone https://github.com/StevenBlack/hosts.git'
+echo 'NOTE: This is a LONG download!'
+cd $DIR_TMP && git clone https://github.com/StevenBlack/hosts.git
+wait
+
+cd $DIR_HOSTS && docker run --pull always --rm -it -v /etc/hosts:/etc/hosts \
+ghcr.io/stevenblack/hosts:latest updateHostsFile.py --auto \
+--replace --extensions fakenews gambling porn social
+
+echo "The old $FILE_HOSTS file is at $FILE_HOSTS_OLD ."
+echo 'If you wish to visit any blocked sites, just comment them out'
+echo "in the $FILE_HOSTS file."
