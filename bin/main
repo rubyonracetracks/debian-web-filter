@@ -27,9 +27,9 @@ echo "mkdir $DIR_TMP"
 mkdir $DIR_TMP
 
 echo '----------------------------------------------'
-echo 'git clone git@github.com:StevenBlack/hosts.git'
+echo 'git clone https://github.com/StevenBlack/hosts'
 echo 'NOTE: This is a LONG download!'
-cd $DIR_TMP && git clone git@github.com:StevenBlack/hosts.git
+cd $DIR_TMP && git clone https://github.com/StevenBlack/hosts
 wait
 
 cd $DIR_HOSTS && docker run --pull always --rm -it -v /etc/hosts:/etc/hosts \
