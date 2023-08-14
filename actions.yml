@@ -1,0 +1,4 @@
+inputs:
+  access-token:
+    description: 'PAT with repository scope (https://github.com/settings/tokens)'
+    required: false
