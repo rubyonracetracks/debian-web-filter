@@ -1,3 +1,6 @@
+# Following example from
+# https://github.com/GuillaumeFalourd/clone-github-repo-action
+
 inputs:
   access-token:
     description: 'PAT with repository scope (https://github.com/settings/tokens)'
