@@ -6,11 +6,6 @@ on:
   schedule:
     - cron: '21 5 * * *'
 
-inputs:
-  access-token:
-    description: 'PAT with repository scope (https://github.com/settings/tokens)'
-    required: false
-
 jobs:
   build:
     runs-on: ubuntu-latest
