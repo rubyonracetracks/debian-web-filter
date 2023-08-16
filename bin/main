@@ -26,16 +26,20 @@ echo '--------------'
 echo "mkdir $DIR_TMP"
 mkdir $DIR_TMP
 
-echo '----------------------------------------------'
-echo 'git clone https://github.com/StevenBlack/hosts'
-echo 'NOTE: This is a LONG download!'
-cd $DIR_TMP && git clone https://github.com/StevenBlack/hosts
-wait
+echo '---------------------------------------------------------------------'
+echo 'git clone https://github.com/rubyonracetracks/repo-manager-sample-app'
+git clone https://github.com/rubyonracetracks/repo-manager-sample-app
 
-cd $DIR_HOSTS && docker run --pull always --rm -it -v /etc/hosts:/etc/hosts \
+# echo '----------------------------------------------'
+# echo 'git clone https://github.com/StevenBlack/hosts'
+# echo 'NOTE: This is a LONG download!'
+# cd $DIR_TMP && git clone https://github.com/StevenBlack/hosts
+# wait
+
+# cd $DIR_HOSTS && docker run --pull always --rm -it -v /etc/hosts:/etc/hosts \
 ghcr.io/stevenblack/hosts:latest updateHostsFile.py --auto \
 --replace --extensions fakenews gambling porn social
 
-echo "The old $FILE_HOSTS file is at $FILE_HOSTS_OLD ."
-echo 'If you wish to visit any blocked sites, just comment them out'
-echo "in the $FILE_HOSTS file."
+# echo "The old $FILE_HOSTS file is at $FILE_HOSTS_OLD ."
+# echo 'If you wish to visit any blocked sites, just comment them out'
+# echo "in the $FILE_HOSTS file."
