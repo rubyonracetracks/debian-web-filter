@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+  schedule:
+    - cron: '21 5 * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+#      - name: Configure SSH
+#        env:
+#          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+#          SSH_PUBLIC_KEY: ${{ secrets.SSH_PUBLIC_KEY }}
+#          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+#        run: bin/config-ssh 'ed25519'
+
+      - name: Run the web filtering script
+        run: bash main.sh
