@@ -20,5 +20,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Provision
+        run: bin/provision
+
       - name: Run web-filter
         run: bash test-ci.sh
